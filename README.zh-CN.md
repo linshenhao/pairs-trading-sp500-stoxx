@@ -61,7 +61,6 @@
 - [13. 项目结构](#13-项目结构)
 - [14. 如何运行项目](#14-如何运行项目)
 - [15. 数据发布与许可说明](#15-数据发布与许可说明)
-- [16. 如何一步一步发布到 GitHub](#16-如何一步一步发布到-github)
 - [17. 参考文献](#17-参考文献)
 
 ---
@@ -606,36 +605,36 @@ gross_return, transaction_cost, borrow_cost, net_return
 
 ```text
 Pairs Trading Project/
-├── README.md
-├── README.zh-CN.md
-├── requirements.txt
-├── .gitignore
-├── pairs_trading/
-│   ├── __init__.py
-│   ├── backtest.py          # Pair selection and backtest engine
-│   ├── extract.py           # Excel extraction and cache creation
-│   ├── plots.py             # Shared GitHub-ready plotting style
-│   └── run.py               # Command-line runner and result export
-├── notebooks/
-│   ├── SP500_Improved.ipynb
-│   ├── STOXX.ipynb
-│   └── legacy/
-│       └── SP500_Original.ipynb
-├── data/
-│   ├── raw/                 # Ignored: original licensed workbooks
-│   └── cache/               # Ignored: generated Parquet/CSV caches
-├── results/
-│   ├── summary.csv
-│   ├── spx_cointegration/
-│   ├── spx_distance/
-│   ├── stoxx_cointegration/
-│   └── stoxx_distance/
-├── docs/
-│   ├── PROJECT_EXPLANATION_CN.md
-│   ├── reference/
-│   └── legacy/
-└── tests/
-    └── test_pairs_trading.py
+├──> README.md
+├──> README.zh-CN.md
+├──> requirements.txt
+├──> .gitignore
+├──> pairs_trading/
+│   ├──> __init__.py
+│   ├──> backtest.py          # Pair selection and backtest engine
+│   ├──> extract.py           # Excel extraction and cache creation
+│   ├──> plots.py             # Shared GitHub-ready plotting style
+│   └──> run.py               # Command-line runner and result export
+├──> notebooks/
+│   ├──> SP500_Improved.ipynb
+│   ├──> STOXX.ipynb
+│   └──> legacy/
+│       └──> SP500_Original.ipynb
+├──> data/
+│   ├──> raw/                 # Ignored: original licensed workbooks
+│   └──> cache/               # Ignored: generated Parquet/CSV caches
+├──> results/
+│   ├──> summary.csv
+│   ├──> spx_cointegration/
+│   ├──> spx_distance/
+│   ├──> stoxx_cointegration/
+│   └──> stoxx_distance/
+├──> docs/
+│   ├──> PROJECT_EXPLANATION_CN.md
+│   ├──> reference/
+│   └──> legacy/
+└──> tests/
+    └──> test_pairs_trading.py
 ```
 
 主要入口：
@@ -799,258 +798,6 @@ git add -f data/cache
 
 ---
 
-## 16. 如何一步一步发布到 GitHub
-
-下面使用终端完成首次上传。所有命令都由你自己执行，本项目不会自动创建或推送仓库。
-
-### 第 1 步：创建 GitHub 空仓库
-
-1. 登录 [GitHub](https://github.com/)；
-2. 点击右上角 `+`；
-3. 选择 `New repository`；
-4. Repository name 建议填写：
-
-```text
-pairs-trading-sp500-stoxx
-```
-
-5. Description 建议填写：
-
-```text
-Walk-forward pairs trading research on the S&P 500 and STOXX 600.
-```
-
-6. 建议第一次先选择 `Private`；
-7. 不要勾选 `Add a README file`；
-8. 不要添加 `.gitignore`；
-9. 暂时不要选择 License；
-10. 点击 `Create repository`。
-
-创建空仓库可以避免本地 README 与 GitHub 自动生成文件产生首次推送冲突。参考 [GitHub 官方导入本地项目说明](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)。
-
-### 第 2 步：打开 Terminal 并进入项目
-
-```bash
-cd "/Users/linshenhao/Desktop/Financial Market Analytics/Pairs Trading Project"
-pwd
-ls
-```
-
-你应该能看到 `README.md`、`pairs_trading/`、`notebooks/`、`results/` 和 `tests/`。
-
-### 第 3 步：检查 Git
-
-```bash
-git --version
-```
-
-如果 macOS 提示安装 Command Line Tools，按照系统提示安装后再继续。
-
-### 第 4 步：设置 Git 身份
-
-第一次使用 Git 时执行：
-
-```bash
-git config --global user.name "你的 GitHub 用户名"
-git config --global user.email "你的 GitHub 邮箱"
-```
-
-检查：
-
-```bash
-git config --global user.name
-git config --global user.email
-```
-
-### 第 5 步：初始化仓库
-
-```bash
-git init -b main
-git status
-```
-
-### 第 6 步：再次检查数据是否被忽略
-
-```bash
-git check-ignore -v data/raw/*
-git check-ignore -v data/cache/*
-git status --ignored
-```
-
-确认原始 `.xlsm` 和缓存文件显示为 ignored，而不是准备提交的文件。
-
-### 第 7 步：决定是否发布课程和旧版文档
-
-运行：
-
-```bash
-git status --short
-```
-
-重点检查：
-
-```text
-docs/reference/
-docs/legacy/
-```
-
-如果这些文件不适合公开，可以在执行 `git add .` 后取消暂存：
-
-```bash
-git restore --staged docs/reference docs/legacy
-```
-
-或者先把对应目录加入 `.gitignore`。
-
-### 第 8 步：添加文件并认真检查
-
-```bash
-git add .
-git status
-git diff --cached --stat
-```
-
-应该上传的主要内容包括：
-
-```text
-README.md
-README.zh-CN.md
-requirements.txt
-.gitignore
-pairs_trading/
-notebooks/
-results/
-tests/
-docs/PROJECT_EXPLANATION_CN.md
-```
-
-不应该看到：
-
-```text
-data/raw/
-data/cache/
-.DS_Store
-__pycache__/
-.venv/
-```
-
-如果误暂存数据但还没有 commit：
-
-```bash
-git restore --staged data/raw data/cache
-```
-
-### 第 9 步：创建第一次提交
-
-```bash
-git commit -m "Initial release of pairs trading research project"
-```
-
-然后检查：
-
-```bash
-git status
-```
-
-### 第 10 步：连接 GitHub 仓库
-
-回到 GitHub 新仓库页面，复制 HTTPS 地址，格式类似：
-
-```text
-https://github.com/你的用户名/pairs-trading-sp500-stoxx.git
-```
-
-在终端执行：
-
-```bash
-git remote add origin https://github.com/你的用户名/pairs-trading-sp500-stoxx.git
-git remote -v
-```
-
-### 第 11 步：首次推送
-
-```bash
-git push -u origin main
-```
-
-首次推送可能打开浏览器要求登录和授权。如果终端要求密码，不要输入 GitHub 账户密码；GitHub 命令行认证需要浏览器授权、credential manager 或 Personal Access Token。
-
-### 第 12 步：在 GitHub 页面检查
-
-刷新仓库页面，确认：
-
-- README 正常显示；
-- 两张主要结果图正常显示；
-- notebook 可以打开；
-- `data/raw/` 和 `data/cache/` 不存在；
-- 没有个人密码、token、邮箱文件或受限数据；
-- 项目结构与 README 一致。
-
-确认无误后，可以在：
-
-```text
-Settings → General → Danger Zone → Change repository visibility
-```
-
-将仓库从 Private 改为 Public。
-
-### 第 13 步：以后如何更新
-
-每次修改后执行：
-
-```bash
-cd "/Users/linshenhao/Desktop/Financial Market Analytics/Pairs Trading Project"
-
-git status
-git add .
-git status
-git commit -m "Describe the update"
-git push
-```
-
-例如：
-
-```bash
-git add .
-git commit -m "Improve model diagnostics and documentation"
-git push
-```
-
-### 常见错误
-
-#### `remote origin already exists`
-
-```bash
-git remote -v
-git remote set-url origin 你的正确仓库地址
-```
-
-#### `Author identity unknown`
-
-重新执行第 4 步设置用户名和邮箱。
-
-#### 文件超过 100 MB
-
-不要强行推送原始数据。先确认它是否被暂存：
-
-```bash
-git status
-```
-
-如果还没有 commit：
-
-```bash
-git restore --staged "data/raw/SPX500 Original.xlsm"
-```
-
-然后确认 `.gitignore` 包含 `data/raw/`。
-
-#### GitHub 仓库已经自动创建 README
-
-最简单的方法是删除尚未使用的远程仓库，然后重新创建一个空仓库。也可以先拉取并合并，但对第一次上传没有必要增加复杂度。
-
----
-
 ## 17. 参考文献
 
 - Engle, R. F., & Granger, C. W. J. (1987). *Co-integration and error correction: Representation, estimation, and testing*.
@@ -1073,3 +820,20 @@ git restore --staged "data/raw/SPX500 Original.xlsm"
 - 为下一阶段研究提供清晰、可验证的 baseline。
 
 S&P 500 严格协整法主要通过拒绝不稳定交易降低亏损；STOXX 600 稳定距离法具有一定低 beta 分散化价值，但大部分费前优势被成本消耗。下一步最重要的不是继续优化旧样本，而是在冻结当前规则后，使用更新的未见数据和更真实的执行模型重新检验。
+
+## Authors
+
+| Author | Links |
+|---|---|
+| **Shen Hao Stefano Lin** | <a href="https://github.com/linshenhao"><img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub"></a> <a href="https://www.linkedin.com/in/linshenhao-49b127393"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white" alt="LinkedIn"></a> |
+| **Li Hao** | Co-author |
+
+---
+
+<div align="center">
+
+<p><strong>Built as a reproducible deep-learning study of human action recognition on HMDB51.</strong></p>
+
+<p><a href="https://github.com/linshenhao/hmdb51-action-recognition">View the repository</a> · <a href="PROJECT_EXPLANATION.md">Read the detailed walkthrough</a></p>
+
+</div>
