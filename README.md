@@ -604,36 +604,36 @@ Every extension should have an ablation test. Complexity is justified only if it
 
 ```text
 Pairs Trading Project/
-├── README.md                     # English project guide
-├── README.zh-CN.md               # Chinese project guide
-├── requirements.txt
-├── .gitignore
-├── pairs_trading/
-│   ├── __init__.py
-│   ├── backtest.py               # Pair selection and backtest engine
-│   ├── extract.py                # Excel extraction and cache creation
-│   ├── plots.py                  # Shared GitHub-ready chart style
-│   └── run.py                    # Command-line runner and result export
-├── notebooks/
-│   ├── SP500_Improved.ipynb
-│   ├── STOXX.ipynb
-│   └── legacy/
-│       └── SP500_Original.ipynb
-├── data/
-│   ├── raw/                      # Ignored: original licensed workbooks
-│   └── cache/                    # Ignored: generated Parquet/CSV caches
-├── results/
-│   ├── summary.csv
-│   ├── spx_cointegration/
-│   ├── spx_distance/
-│   ├── stoxx_cointegration/
-│   └── stoxx_distance/
-├── docs/
-│   ├── PROJECT_EXPLANATION_CN.md
-│   ├── reference/
-│   └── legacy/
-└── tests/
-    └── test_pairs_trading.py
+├──> README.md                     # English project guide
+├──> README.zh-CN.md               # Chinese project guide
+├──> requirements.txt
+├──> .gitignore
+├──> pairs_trading/
+│   ├──> __init__.py
+│   ├──> backtest.py               # Pair selection and backtest engine
+│   ├──> extract.py                # Excel extraction and cache creation
+│   ├──> plots.py                  # Shared GitHub-ready chart style
+│   └──> run.py                    # Command-line runner and result export
+├──> notebooks/
+│   ├──> SP500_Improved.ipynb
+│   ├──> STOXX.ipynb
+│   └──> legacy/
+│       └──> SP500_Original.ipynb
+├──> data/
+│   ├──> raw/                      # Ignored: original licensed workbooks
+│   └──> cache/                    # Ignored: generated Parquet/CSV caches
+├──> results/
+│   ├──> summary.csv
+│   ├──> spx_cointegration/
+│   ├──> spx_distance/
+│   ├──> stoxx_cointegration/
+│   └──> stoxx_distance/
+├──> docs/
+│   ├──> PROJECT_EXPLANATION_CN.md
+│   ├──> reference/
+│   └──> legacy/
+└──> tests/
+    └──> test_pairs_trading.py
 ```
 
 Recommended entry points:
@@ -789,239 +789,7 @@ Official documentation:
 
 ---
 
-## 16. Publishing this project to GitHub
-
-The following process uses the terminal. You remain in control of every repository and push action.
-
-### Step 1: Create an empty GitHub repository
-
-1. Sign in to [GitHub](https://github.com/);
-2. Click `+` in the upper-right corner;
-3. Select `New repository`;
-4. Suggested repository name:
-
-```text
-pairs-trading-sp500-stoxx
-```
-
-5. Suggested description:
-
-```text
-Walk-forward pairs trading research on the S&P 500 and STOXX 600.
-```
-
-6. Start with `Private` if you have not completed the licensing review;
-7. Do not select `Add a README file`;
-8. Do not add another `.gitignore`;
-9. Do not choose a license yet;
-10. Click `Create repository`.
-
-An empty remote avoids conflicts with the existing local files. See [GitHub's official guide for adding locally hosted code](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github).
-
-### Step 2: Open Terminal and enter the project
-
-```bash
-cd "/Users/linshenhao/Desktop/Financial Market Analytics/Pairs Trading Project"
-pwd
-ls
-```
-
-You should see both README files, `pairs_trading/`, `notebooks/`, `results/`, and `tests/`.
-
-### Step 3: Check Git
-
-```bash
-git --version
-```
-
-If macOS requests Command Line Tools, complete that installation and run the command again.
-
-### Step 4: Set your Git identity
-
-For a first-time Git setup:
-
-```bash
-git config --global user.name "YOUR_GITHUB_USERNAME"
-git config --global user.email "YOUR_GITHUB_EMAIL"
-```
-
-Verify:
-
-```bash
-git config --global user.name
-git config --global user.email
-```
-
-### Step 5: Initialize the local repository
-
-```bash
-git init -b main
-git status
-```
-
-### Step 6: Verify the data exclusions
-
-```bash
-git check-ignore -v data/raw/*
-git check-ignore -v data/cache/*
-git status --ignored
-```
-
-The `.xlsm` workbooks and cache files must appear as ignored.
-
-### Step 7: Review course and legacy documents
-
-Pay particular attention to:
-
-```text
-docs/reference/
-docs/legacy/
-```
-
-If they should not be public, do not stage them. If they were already staged, use:
-
-```bash
-git restore --staged docs/reference docs/legacy
-```
-
-You can also add the directories to `.gitignore` before the first commit.
-
-### Step 8: Stage and inspect the project
-
-```bash
-git add .
-git status
-git diff --cached --stat
-```
-
-Expected project content includes:
-
-```text
-README.md
-README.zh-CN.md
-requirements.txt
-.gitignore
-pairs_trading/
-notebooks/
-results/
-tests/
-docs/PROJECT_EXPLANATION_CN.md
-```
-
-The staged list should not include:
-
-```text
-data/raw/
-data/cache/
-.DS_Store
-__pycache__/
-.venv/
-```
-
-If data were accidentally staged before committing:
-
-```bash
-git restore --staged data/raw data/cache
-```
-
-### Step 9: Create the first commit
-
-```bash
-git commit -m "Initial release of pairs trading research project"
-git status
-```
-
-### Step 10: Connect the GitHub repository
-
-Copy the HTTPS URL from the empty repository page. It will look like:
-
-```text
-https://github.com/YOUR_USERNAME/pairs-trading-sp500-stoxx.git
-```
-
-Then run:
-
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/pairs-trading-sp500-stoxx.git
-git remote -v
-```
-
-### Step 11: Push the main branch
-
-```bash
-git push -u origin main
-```
-
-The first push may open a browser for authentication. If the terminal asks for a password, do not use the GitHub account password; command-line authentication uses browser authorization, a credential manager, SSH, or a personal access token.
-
-### Step 12: Verify the repository page
-
-Refresh GitHub and confirm:
-
-- `README.md` appears as the English homepage;
-- the `简体中文` link opens `README.zh-CN.md`;
-- the Chinese page links back to English;
-- both result images render;
-- the notebooks open correctly;
-- `data/raw/` and `data/cache/` are absent;
-- no token, password, private file, or restricted dataset is present.
-
-After the review, you can change the repository from Private to Public under:
-
-```text
-Settings → General → Danger Zone → Change repository visibility
-```
-
-### Step 13: Push later updates
-
-```bash
-cd "/Users/linshenhao/Desktop/Financial Market Analytics/Pairs Trading Project"
-
-git status
-git add .
-git status
-git commit -m "Describe the update"
-git push
-```
-
-Example:
-
-```bash
-git add .
-git commit -m "Improve model diagnostics and bilingual documentation"
-git push
-```
-
-### Common errors
-
-#### `remote origin already exists`
-
-```bash
-git remote -v
-git remote set-url origin YOUR_CORRECT_REPOSITORY_URL
-```
-
-#### `Author identity unknown`
-
-Repeat Step 4 and set your Git username and email.
-
-#### A file exceeds 100 MB
-
-Do not force-push the workbook. If it has only been staged:
-
-```bash
-git restore --staged "data/raw/SPX500 Original.xlsm"
-```
-
-Then confirm that `.gitignore` contains `data/raw/`.
-
-#### The remote repository already contains an auto-generated README
-
-For a first upload, the simplest solution is to delete the unused remote repository and create a new empty one. Pulling and merging is possible, but unnecessary for a repository that has not yet been used.
-
----
-
-## 17. References
+## 16. References
 
 - Engle, R. F., & Granger, C. W. J. (1987). *Co-integration and error correction: Representation, estimation, and testing*.
 - Gatev, E., Goetzmann, W. N., & Rouwenhorst, K. G. (2006). *Pairs trading: Performance of a relative-value arbitrage rule*.
@@ -1043,3 +811,21 @@ The value of this project is not a claim of guaranteed profitability. It is a mo
 - the current version provides a reproducible baseline for future research.
 
 Robust cointegration mainly improves the S&P result by refusing unstable trades. Stable distance provides some low-beta diversification value in STOXX, but costs consume most of its gross edge. The next important step is not more optimization on the old sample. It is a frozen-model test on newer, untouched data with realistic execution.
+
+## Authors
+
+| Author | Links |
+|---|---|
+| **Shen Hao Stefano Lin** | <a href="https://github.com/linshenhao"><img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub"></a> <a href="https://www.linkedin.com/in/linshenhao-49b127393"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white" alt="LinkedIn"></a> |
+| **Li Hao** | Co-author |
+
+---
+
+<div align="center">
+
+<p><strong>Built as a reproducible deep-learning study of human action recognition on HMDB51.</strong></p>
+
+<p><a href="https://github.com/linshenhao/hmdb51-action-recognition">View the repository</a> · <a href="PROJECT_EXPLANATION.md">Read the detailed walkthrough</a></p>
+
+</div>
+
