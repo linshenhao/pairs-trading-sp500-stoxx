@@ -182,21 +182,21 @@ data/cache/
 
 普通收益率为：
 
-```text
+$$
 return_t = price_t / price_(t-1) - 1
-```
+$$
 
 本项目用对数价格估计配对关系：
 
-```text
-log(y_t) = alpha + beta * log(x_t) + spread_t
-```
+$$
+log(y_t) = \alpha + \beta \cdot log(x_t) + spread_t
+$$
 
 其中：
 
 - `y` 和 `x` 是两只股票；
-- `alpha` 是截距；
-- `beta` 是 hedge ratio（对冲比率）；
+- `α` 是截距；
+- `β` 是 hedge ratio（对冲比率）；
 - `spread` 是两只股票经过比例调整后的相对价格偏离。
 
 ### 4.4 相关性与协整
@@ -215,11 +215,11 @@ log(y_t) = alpha + beta * log(x_t) + spread_t
 
 价差定义为：
 
-```text
-spread_t = log(y_t) - alpha - beta * log(x_t)
-```
+$$
+spread_t = log(y_t) - \alpha - \beta \cdot log(x_t)
+$$
 
-`beta` 决定空头腿相对于多头腿的规模。项目将两边按 `beta` 调整后再进行多空交易，避免简单地“一股对一股”。
+`β` 决定空头腿相对于多头腿的规模。项目将两边按 `β` 调整后再进行多空交易，避免简单地“一股对一股”。
 
 ### 4.6 Mean reversion 和 Z-score
 
@@ -227,9 +227,9 @@ spread_t = log(y_t) - alpha - beta * log(x_t)
 
 Z-score 把当前偏离转换为标准差单位：
 
-```text
-z_t = (spread_t - spread_mean) / spread_std
-```
+$$
+z_t = \frac{(spread_t - spread_{\mu})}{spread_{\sigma}} 
+$$
 
 例如 `z = 2` 表示价差比历史平均值高两个标准差。
 
