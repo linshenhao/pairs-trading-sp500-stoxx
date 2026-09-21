@@ -1,6 +1,27 @@
+<div align="center">
+
 # Walk-Forward Pairs Trading on the S&P 500 and STOXX 600
 
-**English** | [简体中文](README.zh-CN.md)
+<p><strong>An honest, reproducible study of market-neutral statistical arbitrage across U.S. and European equities.</strong></p>
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/pandas-Data%20Analysis-150458?logo=pandas&logoColor=white" alt="pandas">
+  <img src="https://img.shields.io/badge/statsmodels-Econometrics-4C78A8" alt="statsmodels">
+  <img src="https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white" alt="Jupyter">
+  <img src="https://img.shields.io/badge/Matplotlib-Visualization-11557C" alt="Matplotlib">
+</p>
+
+<p>
+  <a href="https://github.com/linshenhao"><img src="https://img.shields.io/badge/GitHub-Stefano%20Lin-181717?logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://www.linkedin.com/in/linshenhao-49b127393"><img src="https://img.shields.io/badge/LinkedIn-Stefano%20Lin-0A66C2?logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+</p>
+
+<p><strong>English</strong> | <a href="README.zh-CN.md">简体中文</a></p>
+
+</div>
+
+---
 
 This project studies pairs trading in the **S&P 500** and **STOXX 600** universes. It starts from historical constituents, prices, sectors, and index weights, then compares two pair-selection methods in a strict walk-forward backtest:
 
@@ -14,6 +35,12 @@ The objective is not to produce the most attractive historical equity curve. It 
 The main conclusion is cautious: **the improved models reduce market exposure and drawdown, but returns remain weak and sensitive to costs and market regimes. The strategies are useful research baselines and may have a diversification role, but they are not ready for live deployment.**
 
 > This repository is for research and education. It is not investment advice.
+
+<p align="center">
+  <img src="results/strategy_comparison.png" alt="Net return, Sharpe ratio, and maximum drawdown for the four walk-forward strategies" width="100%">
+</p>
+
+<p align="center"><em>Figure 1. Net walk-forward results after baseline transaction costs. Low market exposure does not automatically imply a strong economic return.</em></p>
 
 ---
 
@@ -424,7 +451,11 @@ Robust cointegration improves the original negative result and sharply reduces d
 
 The low risk therefore comes partly from strict rejection and cash holdings, not from consistently accurate mean-reversion forecasts.
 
-![S&P 500 robust cointegration result](results/spx_cointegration/equity_curve.png)
+<p align="center">
+  <img src="results/spx_cointegration/equity_curve.png" alt="S&P 500 robust cointegration equity, strategy wealth, and drawdown" width="100%">
+</p>
+
+<p align="center"><em>Figure 2. S&P 500 robust-cointegration strategy: benchmark comparison, gross-versus-net wealth, and drawdown.</em></p>
 
 ### STOXX 600 interpretation
 
@@ -438,7 +469,11 @@ Stable distance is the strongest strategy result in the project, but the economi
 
 The strategy has much lower beta and drawdown than the index, which may provide diversification value. It does not replace a long-term equity investment.
 
-![STOXX 600 stable-distance result](results/stoxx_distance/equity_curve.png)
+<p align="center">
+  <img src="results/stoxx_distance/equity_curve.png" alt="STOXX 600 stable-distance equity, strategy wealth, and drawdown" width="100%">
+</p>
+
+<p align="center"><em>Figure 3. STOXX 600 stable-distance strategy: benchmark comparison, gross-versus-net wealth, and drawdown.</em></p>
 
 ### Interpreting the benchmark comparison
 

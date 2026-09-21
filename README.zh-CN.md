@@ -1,6 +1,27 @@
+<div align="center">
+
 # Walk-Forward Pairs Trading：S&P 500 与 STOXX 600 配对交易研究
 
-[English](README.md) | **简体中文**
+<p><strong>一项覆盖美国与欧洲股票市场、重视诚实评估和可复现性的市场中性统计套利研究。</strong></p>
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/pandas-Data%20Analysis-150458?logo=pandas&logoColor=white" alt="pandas">
+  <img src="https://img.shields.io/badge/statsmodels-Econometrics-4C78A8" alt="statsmodels">
+  <img src="https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white" alt="Jupyter">
+  <img src="https://img.shields.io/badge/Matplotlib-Visualization-11557C" alt="Matplotlib">
+</p>
+
+<p>
+  <a href="https://github.com/linshenhao"><img src="https://img.shields.io/badge/GitHub-Stefano%20Lin-181717?logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://www.linkedin.com/in/linshenhao-49b127393"><img src="https://img.shields.io/badge/LinkedIn-Stefano%20Lin-0A66C2?logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+</p>
+
+<p><a href="README.md">English</a> | <strong>简体中文</strong></p>
+
+</div>
+
+---
 
 这是一个以 **S&P 500** 和 **STOXX 600** 为股票池的配对交易（Pairs Trading）研究项目。项目从历史成分股、价格、行业和指数权重数据出发，使用严格的 walk-forward 样本外回测，比较两种配对选择方法：
 
@@ -14,6 +35,12 @@
 最终结论是：**改进后的模型能够显著降低市场暴露和回撤，但收益仍然较弱，且对交易成本和市场阶段较敏感，因此目前更适合作为研究基线和分散化策略，而不是可以直接实盘的稳定盈利模型。**
 
 > 本项目用于学术研究和教学，不构成投资建议。
+
+<p align="center">
+  <img src="results/strategy_comparison.png" alt="四个 walk-forward 策略的净收益、Sharpe 比率与最大回撤" width="100%">
+</p>
+
+<p align="center"><em>图 1：加入基准交易成本后的 walk-forward 净结果。较低的市场暴露并不自动代表较强的经济收益。</em></p>
 
 ---
 
@@ -428,7 +455,11 @@ Walk-forward 不能消除所有过拟合，但比在完整历史样本上一次�
 
 因此，低风险部分来自严格过滤和大量持有现金，而不是模型持续准确预测均值回归。
 
-![S&P 500 robust cointegration result](results/spx_cointegration/equity_curve.png)
+<p align="center">
+  <img src="results/spx_cointegration/equity_curve.png" alt="S&P 500 严格协整策略权益曲线、策略净值与回撤" width="100%">
+</p>
+
+<p align="center"><em>图 2：S&P 500 严格协整策略，包括基准比较、费前与费后净值以及回撤。</em></p>
 
 ### STOXX 600 结果
 
@@ -442,7 +473,11 @@ Walk-forward 不能消除所有过拟合，但比在完整历史样本上一次�
 
 它的 beta 和回撤明显低于指数，说明可能具有分散化价值，但结果不够强，不能替代长期股票投资。
 
-![STOXX 600 stable-distance result](results/stoxx_distance/equity_curve.png)
+<p align="center">
+  <img src="results/stoxx_distance/equity_curve.png" alt="STOXX 600 稳定距离策略权益曲线、策略净值与回撤" width="100%">
+</p>
+
+<p align="center"><em>图 3：STOXX 600 稳定距离策略，包括基准比较、费前与费后净值以及回撤。</em></p>
 
 ### 如何正确理解与指数的比较
 
