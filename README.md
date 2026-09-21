@@ -61,8 +61,7 @@ The main conclusion is cautious: **the improved models reduce market exposure an
 - [13. Repository structure](#13-repository-structure)
 - [14. Reproducing the project](#14-reproducing-the-project)
 - [15. Data publication and licensing](#15-data-publication-and-licensing)
-- [16. Publishing this project to GitHub](#16-publishing-this-project-to-github)
-- [17. References](#17-references)
+- [16. References](#17-references)
 
 ---
 
