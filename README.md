@@ -180,21 +180,21 @@ Market neutral does not mean risk free. The pair can continue diverging, both se
 
 A simple return is:
 
-```text
-return_t = price_t / price_(t-1) - 1
-```
+$$
+return_t = \frac{price_t}{price_(t-1) - 1}
+$$
 
 The project estimates pair relationships using log prices:
 
-```text
-log(y_t) = alpha + beta * log(x_t) + spread_t
-```
+$$
+log(y_t) = \alpha + \beta \cdot log(x_t) + spread_t
+$$
 
 where:
 
 - `y` and `x` are two stocks;
-- `alpha` is the intercept;
-- `beta` is the hedge ratio;
+- `α` is the intercept;
+- `β` is the hedge ratio;
 - `spread` is the relative-price deviation after adjusting for the hedge ratio.
 
 ### 4.4 Correlation and cointegration
@@ -213,11 +213,11 @@ In this project:
 
 The spread is:
 
-```text
-spread_t = log(y_t) - alpha - beta * log(x_t)
-```
+$$
+spread_t = log(y_t) - \alpha - \beta \cdot log(x_t)
+$$
 
-The hedge ratio `beta` determines the size of the short leg relative to the long leg. The strategy therefore does not simply trade one share against one share.
+The hedge ratio `β` determines the size of the short leg relative to the long leg. The strategy therefore does not simply trade one share against one share.
 
 ### 4.6 Mean reversion and the z-score
 
@@ -225,9 +225,9 @@ The hedge ratio `beta` determines the size of the short leg relative to the long
 
 The z-score expresses the deviation in standard-deviation units:
 
-```text
-z_t = (spread_t - spread_mean) / spread_std
-```
+$$
+z_t = \frac{(spread_t - spread_{\mu})}{spread_{\sigma}}
+$$
 
 For example, `z = 2` means the spread is two historical standard deviations above its estimated mean.
 
