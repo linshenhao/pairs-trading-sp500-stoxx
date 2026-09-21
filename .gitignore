@@ -1,0 +1,12 @@
+.DS_Store
+.venv/
+.ipynb_checkpoints/
+__pycache__/
+tmp/
+results_trial*/
+results_distance/
+results_cointegration/
+
+# Bloomberg source data and derived caches should not be redistributed.
+data/raw/
+data/cache/
