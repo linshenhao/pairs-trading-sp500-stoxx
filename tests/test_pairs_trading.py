@@ -16,6 +16,7 @@ from pairs_trading import (
     StrategyConfig,
     half_life,
     plot_equity_drawdown,
+    plot_parameter_sensitivity,
 )
 
 
@@ -29,6 +30,17 @@ class BacktestChecks(unittest.TestCase):
         }, index=dates)
         figure = plot_equity_drawdown(returns, "Test")
         self.assertEqual(len(figure.axes), 3)
+        plt.close(figure)
+
+    def test_parameter_sensitivity_chart_has_two_panels(self):
+        sharpe_grid = pd.DataFrame(
+            [[0.1, 0.2], [-0.1, 0.0]], index=[1.5, 2.0], columns=[0.0, 0.5]
+        )
+        fee_table = pd.DataFrame(
+            {"Sharpe (rf=0)": [0.2, 0.1]}, index=pd.Index([0, 10], name="fee_bps")
+        )
+        figure = plot_parameter_sensitivity(sharpe_grid, fee_table, "Test")
+        self.assertEqual(len(figure.axes), 2)
         plt.close(figure)
 
     def test_extreme_spread_is_not_opened(self):

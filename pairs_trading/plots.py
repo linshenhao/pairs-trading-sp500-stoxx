@@ -5,6 +5,7 @@ from __future__ import annotations
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.colors import TwoSlopeNorm
 from matplotlib.ticker import PercentFormatter
 
 COLORS = {
@@ -130,3 +131,45 @@ def plot_diagnostics(net: pd.Series, benchmark: pd.Series, counts: pd.Series,
                 ylabel="Pairs", xlabel="")
     fig.tight_layout()
     return fig, annual, rolling_sharpe
+
+
+def plot_parameter_sensitivity(sharpe_grid: pd.DataFrame,
+                               fee_table: pd.DataFrame, title: str):
+    """Plot entry-exit Sharpe stability and transaction-cost sensitivity."""
+    set_plot_style()
+    fig, axes = plt.subplots(1, 2, figsize=(12.5, 4.5), layout="constrained")
+
+    values = sharpe_grid.to_numpy(dtype=float)
+    limit = max(np.nanmax(np.abs(values)), 0.01)
+    axes[0].imshow(
+        values,
+        cmap="RdYlGn",
+        norm=TwoSlopeNorm(vmin=-limit, vcenter=0, vmax=limit),
+        aspect="auto",
+    )
+    axes[0].set(
+        title="Net Sharpe: entry vs exit",
+        xlabel="Exit z-score",
+        ylabel="Entry z-score",
+        xticks=range(len(sharpe_grid.columns)),
+        yticks=range(len(sharpe_grid.index)),
+        xticklabels=sharpe_grid.columns,
+        yticklabels=sharpe_grid.index,
+    )
+    for row, entry in enumerate(sharpe_grid.index):
+        for column, exit_ in enumerate(sharpe_grid.columns):
+            value = sharpe_grid.loc[entry, exit_]
+            axes[0].text(column, row, f"{value:.2f}", ha="center", va="center",
+                         color="white" if abs(value) > limit * 0.55 else "#0F172A",
+                         fontweight="bold")
+    axes[1].plot(fee_table.index, fee_table["Sharpe (rf=0)"], "o-",
+                 color=COLORS["Strategy net"], lw=1.8)
+    axes[1].axhline(0, color="#94A3B8", lw=0.8)
+    axes[1].set(
+        title="Impact of transaction costs",
+        xlabel="Cost per unit turnover (bps)",
+        ylabel="Sharpe (net)",
+        xticks=fee_table.index,
+    )
+    fig.suptitle(title, fontsize=15, fontweight="bold")
+    return fig

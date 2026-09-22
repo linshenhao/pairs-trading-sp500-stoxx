@@ -9,7 +9,13 @@ from .backtest import (
     load_market,
     performance_stats,
 )
-from .plots import plot_diagnostics, plot_equity_drawdown, plot_spread, set_plot_style
+from .plots import (
+    plot_diagnostics,
+    plot_equity_drawdown,
+    plot_parameter_sensitivity,
+    plot_spread,
+    set_plot_style,
+)
 
 __all__ = [
     "MarketData",
@@ -21,6 +27,7 @@ __all__ = [
     "performance_stats",
     "plot_diagnostics",
     "plot_equity_drawdown",
+    "plot_parameter_sensitivity",
     "plot_spread",
     "set_plot_style",
 ]
