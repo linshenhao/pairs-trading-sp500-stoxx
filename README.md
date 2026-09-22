@@ -517,6 +517,12 @@ At the baseline `entry = 2.0, exit = 0.5`, Sharpe is **0.09** for S&P 500 and **
 
 <p align="center"><em>Figure 5. STOXX 600 parameter sensitivity: net Sharpe across entry-exit rules and the impact of transaction costs.</em></p>
 
+#### How to read the figures
+
+- **Left panel — Sharpe matrix:** each row is an entry threshold and each column is an exit threshold. Every cell reports the annualized **net Sharpe ratio** after transaction costs for that rule combination; higher is better. Green shades are only a visual guide within one market's chart, so compare the printed numbers rather than color intensity across the S&P 500 and STOXX figures.
+- **Right panel — cost curve:** the horizontal axis is the estimated cost per unit of turnover in basis points, and the vertical axis is net Sharpe. A line crossing zero means that plausible trading costs can remove the strategy's historical risk-adjusted return.
+- **Why this matters:** the figures check whether the result is robust to nearby trading rules and realistic execution costs. A strategy that works only in one isolated cell, or only at unrealistically low costs, is fragile and unlikely to survive live trading.
+
 **These are descriptive checks, not a new out-of-sample optimization.** All cells reuse the same historical evaluation period. The highest Sharpe is therefore a hypothesis to test on fresh data, not a justified replacement for the baseline.
 
 A credible parameter study should use nested walk-forward evaluation:
