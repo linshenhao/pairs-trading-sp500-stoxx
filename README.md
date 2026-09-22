@@ -499,7 +499,13 @@ The following sensitivity check holds the historically selected pairs fixed and 
 | STOXX | Entry 2.5 | -0.34% | -0.02 | -3.85% |
 | STOXX | Cost 20 bps | -2.65% | -0.12 | -5.20% |
 
-An entry threshold of 1.5 improves both historical samples. However, this result was discovered after examining the full evaluation period. Calling it the new optimal parameter would introduce **backtest overfitting**.
+### Why add a Sharpe matrix and a cost curve?
+
+The updated [S&P 500 notebook](notebooks/SP500_Improved.ipynb) and [STOXX 600 notebook](notebooks/STOXX.ipynb) also show a **3 × 3 net Sharpe matrix**. `Entry` controls how far the pair must diverge before opening a trade; `Exit` controls how close it must return before closing. Testing them together reveals whether a result is reasonably stable across nearby rules or depends on one isolated setting. The selected pairs stay fixed, so this tests trading rules rather than pair selection.
+
+At the baseline `entry = 2.0, exit = 0.5`, Sharpe is **0.09** for S&P 500 and **0.15** for STOXX 600. The historical `entry = 1.5, exit = 1.0` cells reach **0.31** and **0.37**, respectively. The accompanying cost curve shows the other side of the story: raising cost per unit of turnover from 10 to 20 bps changes baseline Sharpe from **0.09 to -0.01** (S&P 500) and from **0.15 to -0.12** (STOXX 600). Thus, the matrix helps diagnose parameter sensitivity, while the cost curve tests whether the apparent edge survives less favorable execution.
+
+**These are descriptive checks, not a new out-of-sample optimization.** All cells reuse the same historical evaluation period. The highest Sharpe is therefore a hypothesis to test on fresh data, not a justified replacement for the baseline.
 
 A credible parameter study should use nested walk-forward evaluation:
 
@@ -827,4 +833,3 @@ Robust cointegration mainly improves the S&P result by refusing unstable trades.
 <p><a href="https://github.com/linshenhao/hmdb51-action-recognition">View the repository</a> · <a href="PROJECT_EXPLANATION.md">Read the detailed walkthrough</a></p>
 
 </div>
-
