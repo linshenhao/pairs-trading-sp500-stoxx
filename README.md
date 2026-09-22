@@ -505,6 +505,18 @@ The updated [S&P 500 notebook](notebooks/SP500_Improved.ipynb) and [STOXX 600 no
 
 At the baseline `entry = 2.0, exit = 0.5`, Sharpe is **0.09** for S&P 500 and **0.15** for STOXX 600. The historical `entry = 1.5, exit = 1.0` cells reach **0.31** and **0.37**, respectively. The accompanying cost curve shows the other side of the story: raising cost per unit of turnover from 10 to 20 bps changes baseline Sharpe from **0.09 to -0.01** (S&P 500) and from **0.15 to -0.12** (STOXX 600). Thus, the matrix helps diagnose parameter sensitivity, while the cost curve tests whether the apparent edge survives less favorable execution.
 
+<p align="center">
+  <img src="results/spx_cointegration/parameter_sensitivity.png" alt="S&P 500 entry-exit Sharpe matrix and transaction-cost sensitivity" width="100%">
+</p>
+
+<p align="center"><em>Figure 4. S&P 500 parameter sensitivity: net Sharpe across entry-exit rules and the impact of transaction costs.</em></p>
+
+<p align="center">
+  <img src="results/stoxx_distance/parameter_sensitivity.png" alt="STOXX 600 entry-exit Sharpe matrix and transaction-cost sensitivity" width="100%">
+</p>
+
+<p align="center"><em>Figure 5. STOXX 600 parameter sensitivity: net Sharpe across entry-exit rules and the impact of transaction costs.</em></p>
+
 **These are descriptive checks, not a new out-of-sample optimization.** All cells reuse the same historical evaluation period. The highest Sharpe is therefore a hypothesis to test on fresh data, not a justified replacement for the baseline.
 
 A credible parameter study should use nested walk-forward evaluation:

@@ -507,6 +507,18 @@ Walk-forward 不能消除所有过拟合，但比在完整历史样本上一次�
 
 基准参数 `entry = 2.0, exit = 0.5` 的 Sharpe 在 S&P 500 和 STOXX 600 分别为 **0.09** 和 **0.15**；历史样本中的 `entry = 1.5, exit = 1.0` 分别达到 **0.31** 和 **0.37**。旁边的成本曲线说明另一面：每单位换手成本从 10 bps 升至 20 bps 时，基准 Sharpe 分别从 **0.09 降至 -0.01**、从 **0.15 降至 -0.12**。所以矩阵用于观察参数敏感性，成本曲线用于检查看似存在的优势能否承受更不利的执行条件。
 
+<p align="center">
+  <img src="results/spx_cointegration/parameter_sensitivity.png" alt="S&P 500 的 entry-exit Sharpe 矩阵和交易成本敏感度" width="100%">
+</p>
+
+<p align="center"><em>图 4：S&P 500 参数敏感度，包括不同 entry-exit 规则下的费后 Sharpe 与交易成本影响。</em></p>
+
+<p align="center">
+  <img src="results/stoxx_distance/parameter_sensitivity.png" alt="STOXX 600 的 entry-exit Sharpe 矩阵和交易成本敏感度" width="100%">
+</p>
+
+<p align="center"><em>图 5：STOXX 600 参数敏感度，包括不同 entry-exit 规则下的费后 Sharpe 与交易成本影响。</em></p>
+
 **这只是诊断，不是新的样本外参数优化。** 所有格子都重复使用同一段历史评价期；最高 Sharpe 只能作为未来用新数据检验的假设，不能直接替换正式基准参数。
 
 正确做法是 nested walk-forward：
